@@ -79,10 +79,56 @@
           </button>
         </form>
       </div>
+      {% if current_user.is_authenticated %}
+      <button class="btn btn-success">
+        Log out
+      </button>
+      {% endif %}
     </nav>
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for
+    message in messages %} {% if message == "Log in successful!" %}
+    <div class="flashes alert alert-success">
+      {{ message }}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %} {% if message == "Wrong password, try again!" %}
+    <div class="flashes alert alert-danger">
+      {{ message }}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %} {% if message == 'No user with such username,try again!' %}
+    <div class="flashes alert alert-danger">
+      {{ message }}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %}{% endfor %} {% endif %} {% endwith %} {% block body %}{%
+    endblock %}
+
     <div class="container">
       {% block content %} {% endblock %}
     </div>
+
     <footer>
       Made with &hearts; at
       <a

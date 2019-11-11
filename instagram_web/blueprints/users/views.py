@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template,request,redirect,url_for
-import models.user as u 
+from models.user import User_ as u 
 from werkzeug.security import generate_password_hash
 
 users_blueprint = Blueprint('users',
@@ -18,7 +18,7 @@ def create():
     username = request.form.get('username')
     password = generate_password_hash(request.form.get('password'))
     email = request.form.get('email')
-    u.User_(username=username,password=password,email=email).save()
+    u(username=username,password=password,email=email).save()
     return redirect(url_for('home'))
 
 
